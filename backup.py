@@ -1,11 +1,9 @@
 #!/usr/bin/env python  
 
 from __future__ import print_function
-from subprocess import Popen, PIPE
 import os
-import gc
-import re
 import sys
+import shutil
 import tarfile
 import datetime
 from cfgparser import MyConfigParser as mycp
@@ -41,6 +39,7 @@ def run():
         tar = tarfile.open(os.path.join(path, filename + '.tar.gz'), "w:gz")
         tar.add(os.path.join(path, filename))
         tar.close()
+        shutil.rmtree(os.path.join(path, filename), ignore_errors=True)
 
 if __name__ == '__main__':
     run()
